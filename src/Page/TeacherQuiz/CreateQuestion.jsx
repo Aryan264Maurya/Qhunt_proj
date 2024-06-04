@@ -19,6 +19,7 @@ export default function CreateQuestionForm() {
     permission: 'NO',
     students: [],
     giveQuiz: 'NO',
+    about: '',
   });
 
   const handleChange = (e, questionIndex, optionIndex) => {
@@ -223,6 +224,15 @@ export default function CreateQuestionForm() {
               <option value="YES">YES</option>
               <option value="NO">NO</option>
             </select>
+            <label htmlFor="about">About:</label>
+            <textarea
+              id="about"
+              name="about"
+              value={extraInfo.about}
+              onChange={(e) => setExtraInfoState({ ...extraInfo, about: e.target.value })}
+              className="rounded-md bg-gray-100 px-2 py-1 text-black"
+              required
+            />
             <button
               type="button"
               onClick={handleExtraInfoSubmit}

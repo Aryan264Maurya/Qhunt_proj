@@ -20,6 +20,7 @@ import GetMyQuiz from "./Page/TeacherQuiz/getQuiz";
 import QuizWindow from "./Page/studentQuiz/QuizWindow";
 import About from "./Page/About";
 import Contact from "./Page/Contact"
+import AvailableQuiz from "./Page/studentQuiz/AvailableQuiz";
 function App() {
   // const { user } = useSelector((state) => state.profile)
   return (
@@ -57,7 +58,7 @@ function App() {
       <Route path="dashboard/quiz-history" element={<QuizHistory/>}/>
       <Route path="/quiz-window" element={<QuizWindow/>}></Route>
       <Route path="dashboard/instructor" element={<Instructor/>}/>
-      
+       <Route path="dashboard/quiz-practice" element={<AvailableQuiz/>}/>
     </Route>
     <Route path="dashboard/take-quiz" element={<TakeQuiz/>}/>
      <Route
@@ -88,15 +89,8 @@ function App() {
         > 
          
         </Route>
-        <Route
-          path="about"
-          element={
-            <OpenRoute>
-              <About />
-            </OpenRoute>
-          }
-        />
     <Route path="/contact" element={<Contact />} />
+    <Route path="/about" element={<About/>} />
        
        
 

@@ -27,6 +27,16 @@ exports.getAllextraInfo= async (req, res) => {
     }
 }
 
+exports.getEveryExtraInfo = async (req, res) => {
+    try {
+        // Find all extra information
+        const allExtraInfo = await ExtraInfo.find();
+
+        res.json(allExtraInfo);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
 
 exports.updateInfo= async (req, res) => {
     try {

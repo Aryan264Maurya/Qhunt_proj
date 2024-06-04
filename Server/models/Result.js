@@ -8,7 +8,6 @@ const resultSchema = new mongoose.Schema({
     points:{type:Number,default:0},
     achived:{type:Number,default :0},
     passed:{type:String},
-    showResult:{type:String},
     createdAt:{type:Date, default:Date.now},
 
 });

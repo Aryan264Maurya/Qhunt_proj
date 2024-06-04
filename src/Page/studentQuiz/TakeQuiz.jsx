@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NewQuizzes from './NewQuiz'; // Import component for New Quizzes
 import PracticeQuizzes from './PracticeQuiz'; // Import component for Practice Quizzes
+// import AvailableQuiz from './AvailableQuiz';
 
 export default function TakeQuiz() {
   // Define state to keep track of selected button and whether a quiz type is selected

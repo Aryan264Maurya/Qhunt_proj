@@ -31,17 +31,22 @@ const DisplayQuizzes = ({ quizzes }) => {
   const handleShowQuestions = (quiz) => {
     setSelectedQuiz(quiz);
     setSelectedQuestion(null);
+    setExtraInfo(null);
   };
 
   const handleShowQuiz = async (quiz) => {
-    setSelectedQuestion(selectedQuestion === quiz ? null : quiz);
-
-    try {
-      const data = await getExtraQuiz(quiz.quizName);
-      setExtraInfo(data[0]);
-      setEditingInfo({ ...data[0] });
-    } catch (error) {
-      console.error('Error fetching extra info:', error);
+    if (selectedQuestion === quiz) {
+      setSelectedQuestion(null);
+      setExtraInfo(null); // Reset extraInfo when hiding quiz
+    } else {
+      setSelectedQuestion(quiz);
+      try {
+        const data = await getExtraQuiz(quiz.quizName);
+        setExtraInfo(data[0]);
+        setEditingInfo({ ...data[0] });
+      } catch (error) {
+        console.error('Error fetching extra info:', error);
+      }
     }
   };
 
@@ -135,18 +140,20 @@ const DisplayQuizzes = ({ quizzes }) => {
         </div>
       )}
 
-      {deleteConfirmation && (
-        <div className="fixed inset-0 z-50 overflow-auto flex justify-center items-center bg-black bg-opacity-50 text-richblack-900">
-          <div className="bg-white p-8 max-w-lg mx-auto rounded-lg text-center">
-            <p className="text-lg text-gray-800 mb-4">Confirm Deletion</p>
-            <p className="text-sm text-gray-600 mb-4">Are you sure you want to delete the quiz "{deleteConfirmation}"?</p>
-            <div className="flex justify-center">
-              <button onClick={() => handleDeleteQuiz(deleteConfirmation)} className="px-4 py-2 bg-red-500  rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600 mr-2 text-richblack-900">Delete</button>
-              <button onClick={() => setDeleteConfirmation(null)} className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:bg-gray-400">Cancel</button>
-            </div>
-          </div>
-        </div>
-      )}
+{deleteConfirmation && (
+  <div className="fixed inset-0 z-50 overflow-auto flex justify-center items-center bg-black bg-opacity-50 text-richblack-900">
+    <div className="bg-white p-8 max-w-lg mx-auto rounded-lg text-center">
+      <p className="text-lg text-gray-800 mb-4">Confirm Deletion</p>
+      <p className="text-sm text-gray-600 mb-4">Are you sure you want to delete the quiz "{deleteConfirmation}"?</p>
+      <div className="flex justify-center">
+        <button onClick={() => handleDeleteQuiz(deleteConfirmation)} className="px-4 py-2 bg-yellow-50 mr-8 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600 mr-2 text-white transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110">Delete</button>
+        <button onClick={() => setDeleteConfirmation(null)} className="px-4 py-2 bg-gray-300 bg-blue-100 ml-8 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:bg-gray-400 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110">Cancel</button>
+      </div>
+    </div>
+  </div>
+)}
+
+
 
       {showModal && (
         <div className="fixed inset-0 z-50 overflow-auto flex justify-center items-center bg-black bg-opacity-50 text-richblack-900">

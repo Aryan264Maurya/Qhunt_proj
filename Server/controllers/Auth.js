@@ -19,20 +19,19 @@ exports.signup = async (req, res) => {
             lastName,
             email,
             password,
-            confirmpassword,
+            confirmPassword,
             accountType,
-            contactNumber,
             otp,
         } = req.body;
 
-        if (!firstName || !lastName || !email || !password || !confirmpassword || !otp) {
+        if (!firstName || !lastName || !email || !password || !confirmPassword || !otp) {
             return res.status(403).send({
                 success: false,
-                message: "Please fill in all the details",
+                message: "Please fill in all the details understood",
             });
         }
 
-        if (password !== confirmpassword) {
+        if (password !== confirmPassword) {
             return res.status(400).json({
                 success: false,
                 message: "Password and Confirm Password do not match. Please try again.",
@@ -77,7 +76,6 @@ exports.signup = async (req, res) => {
             firstName,
             lastName,
             email,
-            contactNumber,
             password: hashedPassword,
             accountType,
             approved,
@@ -181,20 +179,18 @@ exports.sendotp = async (req, res) => {
             });
         }
 
-        var otp = otpGenerator.generate(6, {
-            upperCaseAlphabets: false,
-            lowerCaseAlphabets: false,
-            specialChars: false,
-        });
-        const result = await OTP.find({ otp: otp });
-        console.log("Result is Generate OTP Func");
-        console.log("OTP", otp);
-        console.log("Result", result);
-        while (result) {
+        let otp;
+        let existingOTP;
+
+        do {
             otp = otpGenerator.generate(6, {
                 upperCaseAlphabets: false,
+                lowerCaseAlphabets: false,
+                specialChars: false,
             });
-        }
+            existingOTP = await OTP.findOne({ otp: otp });
+        } while (existingOTP);
+
         const otpPayload = { email, otp };
         const otpBody = await OTP.create(otpPayload);
         console.log("OTP Body", otpBody);
@@ -208,6 +204,7 @@ exports.sendotp = async (req, res) => {
         return res.status(500).json({ success: false, error: error.message });
     }
 }
+
 
 //change password
 exports.changePassword = async (req, res) => {

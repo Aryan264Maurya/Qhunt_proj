@@ -17,6 +17,7 @@ export const questionEndpoints={
   GET_QUIZ:BASE_URL+"/create/getquizes",
   GET_STUDENT_QUIZ:BASE_URL+"/take/getquizes",
   CREATE_EXTRA_INFO:BASE_URL+"/einfo",
+  GET_EVERY_EXTRAINFO:BASE_URL+"/all-einfo",
   DELETE_QUIZ:BASE_URL+"/create/delquiz",
   UPDATE_EXTRA_INFO:BASE_URL+"/up-einfo"
 }

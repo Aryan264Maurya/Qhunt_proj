@@ -29,9 +29,10 @@ function VerifyEmail() {
       lastName,
       email,
       password,
-      confirmpassword,
+      confirmPassword,
       accountType,
     } = signupData;
+   console.log("inside verify email->",signupData);
 
     dispatch(
       signUp(
@@ -40,7 +41,7 @@ function VerifyEmail() {
         lastName,
         email,
         password,
-        confirmpassword,
+        confirmPassword,
         accountType,
         otp,
         navigate

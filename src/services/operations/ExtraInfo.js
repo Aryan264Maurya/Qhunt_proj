@@ -4,7 +4,7 @@ import { questionEndpoints } from "../apis";
 import { setExtraInfo } from "../../slice/ExtraInfoSlice";
 
 // Destructure endpoint from questionEndpoints
-const { CREATE_EXTRA_INFO ,UPDATE_EXTRA_INFO} = questionEndpoints;
+const { CREATE_EXTRA_INFO ,UPDATE_EXTRA_INFO,GET_EVERY_EXTRAINFO} = questionEndpoints;
 
 // Define action creator to create extra info
 export const CreateExtraInfo = (extraInfoData) => async (dispatch) => {
@@ -31,6 +31,25 @@ export const getExtraQuiz = async (quizName) => {
       }
     
       const response = await apiConnector("GET", `${CREATE_EXTRA_INFO}?quizName=${quizName}`);
+      console.log("response")
+      console.log(response);
+      if (response.status === 200) {
+        const data = response.data;
+        console.log('Extra info:', data);
+        return data; // Return fetched quizzes
+      } else {
+        throw new Error('Failed to fetch quizzes');
+      }
+    } catch (error) {
+      throw new Error('Error fetching quizzes: ' + error.message);
+    }
+  };
+
+  export const getEveryExtraInfo = async () => {
+    try {
+      
+    
+      const response = await apiConnector("GET", `${GET_EVERY_EXTRAINFO}`);
       console.log("response")
       console.log(response);
       if (response.status === 200) {

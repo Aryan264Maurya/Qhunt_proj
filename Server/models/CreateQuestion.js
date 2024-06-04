@@ -4,7 +4,6 @@ const createQuestionSchema = new mongoose.Schema({
     teacherName:{type:String,deafult:''},
     quizName: { type: String, default: '' },
     questions: { type: Array, default: [] },
-   
     createdAt: { type: Date, default: Date.now }
 });
 
