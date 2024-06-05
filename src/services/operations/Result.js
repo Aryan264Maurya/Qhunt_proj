@@ -43,7 +43,7 @@ export const getAllResults = async () => {
 // Function to get results based on quiz name
 export const getResultByQuizName = async (quizName) => {
   try {
-    const response = await apiConnector("GET",`${GET_QUIZ_RESULT}/${quizName}`);
+    const response = await apiConnector("GET",`${GET_QUIZ_RESULT}?quizname=${quizName}`);
     if (response.status === 200) {
       return response.data;
     } else {
